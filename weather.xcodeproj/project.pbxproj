@@ -12,6 +12,7 @@
 		E70FDB891C968F820065F327 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70FDB871C968F820065F327 /* Main.storyboard */; };
 		E70FDB8B1C968F820065F327 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E70FDB8A1C968F820065F327 /* Assets.xcassets */; };
 		E70FDB8E1C968F820065F327 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70FDB8C1C968F820065F327 /* LaunchScreen.storyboard */; };
+		E70FDB981C96BA4D0065F327 /* HttpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FDB971C96BA4D0065F327 /* HttpManager.swift */; };
 		EFCF88227F98AD5D6D8F0ABD /* Pods_weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CD397B56BBEEEE9C66CEE3 /* Pods_weather.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		E70FDB8A1C968F820065F327 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E70FDB8D1C968F820065F327 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E70FDB8F1C968F820065F327 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E70FDB971C96BA4D0065F327 /* HttpManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpManager.swift; sourceTree = "<group>"; };
 		FDF26B30305360F6F77EC2C2 /* Pods-weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-weather/Pods-weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				E70FDB8A1C968F820065F327 /* Assets.xcassets */,
 				E70FDB8C1C968F820065F327 /* LaunchScreen.storyboard */,
 				E70FDB8F1C968F820065F327 /* Info.plist */,
+				E70FDB971C96BA4D0065F327 /* HttpManager.swift */,
 			);
 			path = weather;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E70FDB981C96BA4D0065F327 /* HttpManager.swift in Sources */,
 				E70FDB861C968F820065F327 /* ViewController.swift in Sources */,
 				E70FDB841C968F820065F327 /* AppDelegate.swift in Sources */,
 			);
@@ -273,7 +277,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -311,7 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -324,6 +328,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = weather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmachc.weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -336,6 +341,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = weather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmachc.weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
