@@ -36,34 +36,8 @@ class ViewController: UIViewController {
 //                }
 //        }
         
-        Alamofire.request(
-            .GET,
-            "http://localhost:7700/v1?command=initData",
-            parameters: nil,
-            encoding: .JSON,
-            headers: nil).responseJSON {
-            response in
-
-                if response.result.isSuccess {
-                    print("访问成功")
-                    if let JSON = response.result.value {
-                        let jsonData = try! NSJSONSerialization.dataWithJSONObject(JSON, options: NSJSONWritingOptions.PrettyPrinted) as NSData!
-                        let str = NSString.init(data: jsonData, encoding: NSUTF8StringEncoding)!
-                        self.textView.text = str as String
-                        
-                    }
-                    else {
-                        print("没有返回值")
-                    }
-                }
-                else {
-                    print("访问失败")
-                }
-            
-        }
         
-        let httpManager = HttpManager.defaultManager
-        print("----->>>>",httpManager)
+        
     }
 
     override func didReceiveMemoryWarning() {
