@@ -17,7 +17,7 @@ class HttpManager {
 //        return NetworkReachabilityManager.NetworkReachabilityStatus
 //    }
     
-//    func getRequestToUrl(url: String, params: Dictionary, complete:(Void (^)Dictionary{})) {
-//        
-//    }
+    func getRequest(url: String, params: [String: AnyObject]?, complete: () -> Void) {
+        
+    }
 }
