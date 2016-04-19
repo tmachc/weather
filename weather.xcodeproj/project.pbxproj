@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DAADDFE1CC668FE0020F200 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAADDFD1CC668FE0020F200 /* Common.swift */; };
 		E70FDB841C968F820065F327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FDB831C968F820065F327 /* AppDelegate.swift */; };
 		E70FDB861C968F820065F327 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FDB851C968F820065F327 /* ViewController.swift */; };
 		E70FDB891C968F820065F327 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70FDB871C968F820065F327 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DAADDFD1CC668FE0020F200 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		31CD397B56BBEEEE9C66CEE3 /* Pods_weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E681476B3D2B107561FFA2A2 /* Pods-weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-weather/Pods-weather.debug.xcconfig"; sourceTree = "<group>"; };
 		E70FDB801C968F820065F327 /* weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 				E70FDB8C1C968F820065F327 /* LaunchScreen.storyboard */,
 				E70FDB8F1C968F820065F327 /* Info.plist */,
 				E70FDB971C96BA4D0065F327 /* HttpManager.swift */,
+				2DAADDFD1CC668FE0020F200 /* Common.swift */,
 			);
 			path = weather;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DAADDFE1CC668FE0020F200 /* Common.swift in Sources */,
 				E70FDB981C96BA4D0065F327 /* HttpManager.swift in Sources */,
 				E70FDB861C968F820065F327 /* ViewController.swift in Sources */,
 				E70FDB841C968F820065F327 /* AppDelegate.swift in Sources */,

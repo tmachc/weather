@@ -52,7 +52,7 @@ class HttpManager {
             }
             else {
                 print("访问失败,没有返回值")
-                complete(result: ["errNum": "1", "errMsg": "网络请求失败"])
+                complete(result: ["errNum": 1, "errMsg": "网络请求失败"])
             }
             
         }
