@@ -27,6 +27,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let itemRight = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(share))
         self.navigationItem.rightBarButtonItem = itemRight
         
+        self.initView()
         self.getWeatherData()
     }
     
@@ -45,7 +46,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 for item in result["retData"]!["forecast"] as! [Dictionary<String, String>] {
                     self.arrWeather.append(item)
                 }
-                self.initView()
+                self.setData()
             }
             else {
                 
@@ -54,10 +55,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func initView() -> Void {
-        print(self.arrWeather)
-        for i in 0...self.arrWeather.count - 1 {
-            print(i, self.arrWeather[i])
-            let dicWeather = self.arrWeather[i] as! Dictionary<String, String>
+        for i in 0...10 {
             let viewWeather = UIView.init()
             if i < 7 {
                 viewWeather.backgroundColor = UIColor.orangeColor()
@@ -73,13 +71,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 make.left.equalTo(10 + i * (weatherLength + 10))
                 make.width.equalTo(weatherLength)
                 make.top.height.bottom.equalTo(self.scrWeather)
-                if i == self.arrWeather.count - 1 {
+                if i == 11 - 1 {
                     make.right.equalTo(-10)
                 }
             })
             
             let labDate = UILabel.init()
-            labDate.text = dicWeather["date"]
+            labDate.tag = 1000 + i;
             labDate.textColor = UIColor.blackColor()
             labDate.textAlignment = NSTextAlignment.Center
             viewWeather.addSubview(labDate)
@@ -89,7 +87,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             })
             
             let labWeather = UILabel.init()
-            labWeather.text = dicWeather["type"]
+            labWeather.tag = 1100 + i;
             labWeather.textColor = UIColor.blackColor()
             labWeather.textAlignment = NSTextAlignment.Center
             viewWeather.addSubview(labWeather)
@@ -100,7 +98,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             })
             
             let labTemp = UILabel.init()
-            labTemp.text =  String(format:"%@/%@", dicWeather["hightemp"]!, dicWeather["lowtemp"]!)
+            labTemp.tag = 1200 + i;
             labTemp.textColor = UIColor.blackColor()
             labTemp.textAlignment = NSTextAlignment.Center
             viewWeather.addSubview(labTemp)
@@ -111,7 +109,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             })
             
             let labWind = UILabel.init()
-            labWind.text = dicWeather["fengxiang"]
+            labWind.tag = 1300 + i;
             labWind.textColor = UIColor.blackColor()
             labWind.textAlignment = NSTextAlignment.Center
             viewWeather.addSubview(labWind)
@@ -122,7 +120,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             })
             
             let labWindNum = UILabel.init()
-            labWindNum.text = dicWeather["fengli"]
+            labWindNum.tag = 1400 + i;
             labWindNum.textColor = UIColor.blackColor()
             labWindNum.textAlignment = NSTextAlignment.Center
             viewWeather.addSubview(labWindNum)
@@ -133,7 +131,24 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             })
         }
         
+        self.scrWeather.layoutSubviews()
         self.scrWeather.setContentOffset(CGPoint.init(x: 6 * (weatherLength + 10), y: 0), animated: false)
+    }
+    
+    func setData() -> Void {
+        for i in 0...10 {
+            let dicWeather = self.arrWeather[i] as! Dictionary<String, String>
+            let labDate = self.view.viewWithTag(1000 + i) as! UILabel
+            labDate.text = dicWeather["date"]
+            let labWeather = self.view.viewWithTag(1100 + i) as! UILabel
+            labWeather.text = dicWeather["type"]
+            let labTemp = self.view.viewWithTag(1200 + i) as! UILabel
+            labTemp.text =  String(format:"%@/%@", dicWeather["hightemp"]!, dicWeather["lowtemp"]!)
+            let labWind = self.view.viewWithTag(1300 + i) as! UILabel
+            labWind.text = dicWeather["fengxiang"]
+            let labWindNum = self.view.viewWithTag(1400 + i) as! UILabel
+            labWindNum.text = dicWeather["fengli"]
+        }
     }
     
     func share() -> Void {
