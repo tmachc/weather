@@ -15,6 +15,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var scrView: UIScrollView!
     @IBOutlet var scrWeather: UIScrollView!
     var arrWeather = [Dictionary<String, AnyObject>]()
+    var arrToday = [Dictionary<String, String>]()
     let weatherLength = 100
     
     
@@ -26,6 +27,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.Done, target: nil, action: nil)
         let itemRight = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(share))
         self.navigationItem.rightBarButtonItem = itemRight
+//        let itemLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(gotoSetting))
+        let btnLeft = UIBarButtonItem.init(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(gotoSetting))
+        self.navigationItem.leftBarButtonItem = btnLeft
         
         self.initView()
         self.getWeatherData()
@@ -37,19 +41,26 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                                               headers: ["apikey": "ab66b69af4de223187dcc22167846c2e"])
         { (result) -> Void in
             if result["errNum"]!.isEqual(0) {
-                userDefault.setObject(result["retData"]!["forecast"], forKey: "forecast")
-                userDefault.setObject(result["retData"]!["history"], forKey: "history")
-                userDefault.setObject(result["retData"]!["today"], forKey: "today")
                 for item in result["retData"]!["history"] as! [Dictionary<String, String>] {
                     self.arrWeather.append(item)
                 }
                 for item in result["retData"]!["forecast"] as! [Dictionary<String, String>] {
                     self.arrWeather.append(item)
                 }
+                for item in result["retData"]!["today"]!!["index"] as! [Dictionary<String, String>] {
+                    self.arrToday.append(item)
+                }
+                userDefault.setObject(self.arrWeather, forKey: "arrWeather")
+                userDefault.setObject(self.arrToday, forKey: "arrToday")
+                userDefault.setObject(result["retData"]!["today"]!, forKey: "today")
                 self.setData()
             }
             else {
-                
+                if (userDefault.objectForKey("arrWeather") != nil) {
+                    self.arrWeather = userDefault.objectForKey("arrWeather") as! [Dictionary<String, AnyObject>]
+                    self.arrToday = userDefault.objectForKey("arrToday") as! [Dictionary<String, String>]
+                    self.setData()
+                }
             }
         }
     }
@@ -131,6 +142,68 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             })
         }
         
+        let labChuanYi = UILabel.init()
+        labChuanYi.tag = 2000;
+        labChuanYi.textColor = UIColor.blackColor()
+        labChuanYi.textAlignment = NSTextAlignment.Left
+        self.scrView.addSubview(labChuanYi)
+        labChuanYi.snp_makeConstraints(closure: { (make) in
+            make.top.equalTo(scrWeather.snp_bottom).offset(10)
+            make.left.equalTo(scrView.snp_left).offset(10)
+            make.right.equalTo(scrView.snp_centerX)
+            make.height.equalTo(40)
+        })
+        let labXiChe = UILabel.init()
+        labXiChe.tag = 2001;
+        labXiChe.textColor = UIColor.blackColor()
+        labXiChe.textAlignment = NSTextAlignment.Left
+        self.scrView.addSubview(labXiChe)
+        labXiChe.snp_makeConstraints(closure: { (make) in
+            make.top.height.equalTo(labChuanYi)
+            make.left.equalTo(labChuanYi.snp_right).offset(10)
+            make.right.equalTo(scrView)
+        })
+        
+        let labLvYou = UILabel.init()
+        labLvYou.tag = 2002;
+        labLvYou.textColor = UIColor.blackColor()
+        labLvYou.textAlignment = NSTextAlignment.Left
+        self.scrView.addSubview(labLvYou)
+        labLvYou.snp_makeConstraints(closure: { (make) in
+            make.top.equalTo(labChuanYi.snp_bottom)
+            make.left.right.height.equalTo(labChuanYi)
+        })
+        let labGanMao = UILabel.init()
+        labGanMao.tag = 2003;
+        labGanMao.textColor = UIColor.blackColor()
+        labGanMao.textAlignment = NSTextAlignment.Left
+        self.scrView.addSubview(labGanMao)
+        labGanMao.snp_makeConstraints(closure: { (make) in
+            make.left.height.width.equalTo(labXiChe)
+            make.top.equalTo(labLvYou)
+        })
+        
+        let labYunDong = UILabel.init()
+        labYunDong.tag = 2004;
+        labYunDong.textColor = UIColor.blackColor()
+        labYunDong.textAlignment = NSTextAlignment.Left
+        self.scrView.addSubview(labYunDong)
+        labYunDong.snp_makeConstraints(closure: { (make) in
+            make.top.equalTo(labLvYou.snp_bottom)
+            make.left.right.height.equalTo(labLvYou)
+        })
+        let labZiWaiXian = UILabel.init()
+        labZiWaiXian.tag = 2005;
+        labZiWaiXian.textColor = UIColor.blackColor()
+        labZiWaiXian.textAlignment = NSTextAlignment.Left
+        self.scrView.addSubview(labZiWaiXian)
+        labZiWaiXian.snp_makeConstraints(closure: { (make) in
+            make.left.height.width.equalTo(labGanMao)
+            make.top.equalTo(labYunDong)
+            
+//            make.bottom.equalTo(scrView)
+        })
+        
         self.scrWeather.layoutSubviews()
         self.scrWeather.setContentOffset(CGPoint.init(x: 6 * (weatherLength + 10), y: 0), animated: false)
     }
@@ -149,10 +222,53 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             let labWindNum = self.view.viewWithTag(1400 + i) as! UILabel
             labWindNum.text = dicWeather["fengli"]
         }
+        for dic in self.arrToday {
+            if dic["code"] == "gm" {
+                let lab = self.view.viewWithTag(2003) as! UILabel
+                lab.text = dic["name"]! + ":" + dic["index"]!
+            }
+            else if dic["code"] == "fs" {
+                let lab = self.view.viewWithTag(2005) as! UILabel
+                lab.text = dic["name"]! + ":" + dic["index"]!
+            }
+            else if dic["code"] == "ct" {
+                let lab = self.view.viewWithTag(2000) as! UILabel
+                lab.text = dic["name"]! + ":" + dic["index"]!
+            }
+            else if dic["code"] == "yd" {
+                let lab = self.view.viewWithTag(2004) as! UILabel
+                lab.text = dic["name"]! + ":" + dic["index"]!
+            }
+            else if dic["code"] == "xc" {
+                let lab = self.view.viewWithTag(2001) as! UILabel
+                lab.text = dic["name"]! + ":" + dic["index"]!
+            }
+            else if dic["code"] == "ls" {
+                let lab = self.view.viewWithTag(2002) as! UILabel
+                lab.text = dic["name"]! + ":" + dic["index"]!
+            }
+        }
+    }
+    
+    func gotoSetting() -> Void {
+        self.performSegueWithIdentifier("setting", sender: nil)
     }
     
     func share() -> Void {
         // 分享
+        if (userDefault.objectForKey("today") != nil) {
+            let dic = userDefault.objectForKey("today") as! Dictionary<String, String>
+            let str = "今天的天气情况是：最高气温" + dic["hightemp"]! + ",最低气温" + dic["curTemp"]!
+            self.sendText(str, inScene: WXSceneSession)
+        }
+    }
+    
+    func sendText(text:String, inScene: WXScene)->Bool{
+        let req = SendMessageToWXReq()
+        req.text = text
+        req.bText = true
+        req.scene = Int32(inScene.rawValue)
+        return WXApi.sendReq(req)
     }
 }
 

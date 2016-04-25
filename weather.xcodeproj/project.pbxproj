@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D66BC391CCE6CDB006817E2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC351CCE6CDB006817E2 /* libWeChatSDK.a */; };
+		2D66BC3C1CCE6E0C006817E2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC3B1CCE6E0C006817E2 /* libc++.tbd */; };
+		2D66BC3E1CCE6E1C006817E2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC3D1CCE6E1C006817E2 /* libsqlite3.0.tbd */; };
+		2D66BC401CCE6E2A006817E2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC3F1CCE6E2A006817E2 /* SystemConfiguration.framework */; };
+		2D66BC421CCE6E31006817E2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC411CCE6E31006817E2 /* libz.tbd */; };
+		2D66BC441CCE6F99006817E2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC431CCE6F99006817E2 /* CoreTelephony.framework */; };
+		2D66BC461CCE760E006817E2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66BC451CCE760E006817E2 /* SettingViewController.swift */; };
 		2DAADDFE1CC668FE0020F200 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAADDFD1CC668FE0020F200 /* Common.swift */; };
 		E70FDB841C968F820065F327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FDB831C968F820065F327 /* AppDelegate.swift */; };
 		E70FDB861C968F820065F327 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FDB851C968F820065F327 /* ViewController.swift */; };
@@ -18,6 +25,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D66BC351CCE6CDB006817E2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		2D66BC361CCE6CDB006817E2 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		2D66BC371CCE6CDB006817E2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		2D66BC381CCE6CDB006817E2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		2D66BC3A1CCE6D1B006817E2 /* WeixinShareTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeixinShareTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D66BC3B1CCE6E0C006817E2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		2D66BC3D1CCE6E1C006817E2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		2D66BC3F1CCE6E2A006817E2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2D66BC411CCE6E31006817E2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2D66BC431CCE6F99006817E2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2D66BC451CCE760E006817E2 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2DAADDFD1CC668FE0020F200 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		31CD397B56BBEEEE9C66CEE3 /* Pods_weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E681476B3D2B107561FFA2A2 /* Pods-weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-weather/Pods-weather.debug.xcconfig"; sourceTree = "<group>"; };
@@ -37,6 +55,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D66BC441CCE6F99006817E2 /* CoreTelephony.framework in Frameworks */,
+				2D66BC421CCE6E31006817E2 /* libz.tbd in Frameworks */,
+				2D66BC401CCE6E2A006817E2 /* SystemConfiguration.framework in Frameworks */,
+				2D66BC3E1CCE6E1C006817E2 /* libsqlite3.0.tbd in Frameworks */,
+				2D66BC3C1CCE6E0C006817E2 /* libc++.tbd in Frameworks */,
+				2D66BC391CCE6CDB006817E2 /* libWeChatSDK.a in Frameworks */,
 				EFCF88227F98AD5D6D8F0ABD /* Pods_weather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,9 +68,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D66BC341CCE6CDB006817E2 /* weixin */ = {
+			isa = PBXGroup;
+			children = (
+				2D66BC351CCE6CDB006817E2 /* libWeChatSDK.a */,
+				2D66BC361CCE6CDB006817E2 /* WechatAuthSDK.h */,
+				2D66BC371CCE6CDB006817E2 /* WXApi.h */,
+				2D66BC381CCE6CDB006817E2 /* WXApiObject.h */,
+				2D66BC3A1CCE6D1B006817E2 /* WeixinShareTest-Bridging-Header.h */,
+			);
+			path = weixin;
+			sourceTree = "<group>";
+		};
 		4BC5D7AA8F37823EEA36CFE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D66BC431CCE6F99006817E2 /* CoreTelephony.framework */,
+				2D66BC411CCE6E31006817E2 /* libz.tbd */,
+				2D66BC3F1CCE6E2A006817E2 /* SystemConfiguration.framework */,
+				2D66BC3D1CCE6E1C006817E2 /* libsqlite3.0.tbd */,
+				2D66BC3B1CCE6E0C006817E2 /* libc++.tbd */,
 				31CD397B56BBEEEE9C66CEE3 /* Pods_weather.framework */,
 			);
 			name = Frameworks;
@@ -84,12 +125,14 @@
 			children = (
 				E70FDB831C968F820065F327 /* AppDelegate.swift */,
 				E70FDB851C968F820065F327 /* ViewController.swift */,
+				2D66BC451CCE760E006817E2 /* SettingViewController.swift */,
 				E70FDB871C968F820065F327 /* Main.storyboard */,
 				E70FDB8A1C968F820065F327 /* Assets.xcassets */,
 				E70FDB8C1C968F820065F327 /* LaunchScreen.storyboard */,
 				E70FDB8F1C968F820065F327 /* Info.plist */,
 				E70FDB971C96BA4D0065F327 /* HttpManager.swift */,
 				2DAADDFD1CC668FE0020F200 /* Common.swift */,
+				2D66BC341CCE6CDB006817E2 /* weixin */,
 			);
 			path = weather;
 			sourceTree = "<group>";
@@ -129,6 +172,7 @@
 				TargetAttributes = {
 					E70FDB7F1C968F820065F327 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 973TH9R7F8;
 					};
 				};
 			};
@@ -216,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D66BC461CCE760E006817E2 /* SettingViewController.swift in Sources */,
 				2DAADDFE1CC668FE0020F200 /* Common.swift in Sources */,
 				E70FDB981C96BA4D0065F327 /* HttpManager.swift in Sources */,
 				E70FDB861C968F820065F327 /* ViewController.swift in Sources */,
@@ -336,9 +381,14 @@
 				INFOPLIST_FILE = weather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/weather/weixin",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmachc.weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "weather/weixin/WeixinShareTest-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -352,9 +402,14 @@
 				INFOPLIST_FILE = weather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/weather/weixin",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmachc.weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "weather/weixin/WeixinShareTest-Bridging-Header.h";
 			};
 			name = Release;
 		};

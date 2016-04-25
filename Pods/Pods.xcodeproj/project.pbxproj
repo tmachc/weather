@@ -393,6 +393,14 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0640;
+				TargetAttributes = {
+					26FA7BACCD918570F49CD1E9 = {
+						DevelopmentTeam = E2UEN7M284;
+					};
+					84B00E69E39D2C6AE78A9A62 = {
+						DevelopmentTeam = E2UEN7M284;
+					};
+				};
 			};
 			buildConfigurationList = 883D647FDE4D7990B3CC7C0F /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -489,6 +497,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0113C135F4D0EC9609574883 /* Pods-weather-Alamofire-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -504,6 +513,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-weather-Alamofire/Pods-weather-Alamofire.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Alamofire;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -555,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 04BEAA0FF9EA35D100BDB8B2 /* Pods-weather-SnapKit-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -570,6 +581,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-weather-SnapKit/Pods-weather-SnapKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = SnapKit;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -583,6 +595,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 04BEAA0FF9EA35D100BDB8B2 /* Pods-weather-SnapKit-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -598,6 +611,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-weather-SnapKit/Pods-weather-SnapKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = SnapKit;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -669,6 +683,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0113C135F4D0EC9609574883 /* Pods-weather-Alamofire-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -684,6 +699,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-weather-Alamofire/Pods-weather-Alamofire.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Alamofire;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

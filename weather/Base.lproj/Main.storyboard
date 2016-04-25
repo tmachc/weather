@@ -64,11 +64,41 @@
                     <connections>
                         <outlet property="scrView" destination="jnE-J4-GzU" id="aNa-XV-DqK"/>
                         <outlet property="scrWeather" destination="pht-k6-zoO" id="wzg-bc-24S"/>
+                        <segue destination="paZ-r1-C7F" kind="show" identifier="setting" id="AUM-LV-Fnx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="345" y="242"/>
+        </scene>
+        <!--设置地址页-->
+        <scene sceneID="KyP-ba-wJn">
+            <objects>
+                <viewController id="paZ-r1-C7F" userLabel="设置地址页" customClass="SettingViewController" customModule="weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SdW-Nd-xgE"/>
+                        <viewControllerLayoutGuide type="bottom" id="6ny-42-ubD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1f2-WE-erJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ue3-7T-vqJ">
+                                <rect key="frame" x="26" y="87" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tv" destination="Ue3-7T-vqJ" id="WOY-yP-NBT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y0d-6O-6iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053" y="242"/>
         </scene>
     </scenes>
 </document>
