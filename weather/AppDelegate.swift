@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        WXApi.registerApp("com.tmachc.weather") //改成你实际的AppID
+        WXApi.registerApp("wx577feefc002f9c18") //改成你实际的AppID
         return true
     }
     

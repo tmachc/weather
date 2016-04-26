@@ -29,7 +29,7 @@
 		2D66BC361CCE6CDB006817E2 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		2D66BC371CCE6CDB006817E2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		2D66BC381CCE6CDB006817E2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		2D66BC3A1CCE6D1B006817E2 /* WeixinShareTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeixinShareTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D66BC3A1CCE6D1B006817E2 /* weather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "weather-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D66BC3B1CCE6E0C006817E2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		2D66BC3D1CCE6E1C006817E2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2D66BC3F1CCE6E2A006817E2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -75,7 +75,7 @@
 				2D66BC361CCE6CDB006817E2 /* WechatAuthSDK.h */,
 				2D66BC371CCE6CDB006817E2 /* WXApi.h */,
 				2D66BC381CCE6CDB006817E2 /* WXApiObject.h */,
-				2D66BC3A1CCE6D1B006817E2 /* WeixinShareTest-Bridging-Header.h */,
+				2D66BC3A1CCE6D1B006817E2 /* weather-Bridging-Header.h */,
 			);
 			path = weixin;
 			sourceTree = "<group>";
@@ -172,7 +172,6 @@
 				TargetAttributes = {
 					E70FDB7F1C968F820065F327 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 973TH9R7F8;
 					};
 				};
 			};
@@ -388,7 +387,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmachc.weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "weather/weixin/WeixinShareTest-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "weather/weixin/weather-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -409,7 +408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmachc.weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "weather/weixin/WeixinShareTest-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "weather/weixin/weather-Bridging-Header.h";
 			};
 			name = Release;
 		};

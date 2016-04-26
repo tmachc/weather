@@ -19,7 +19,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let weatherLength = 100
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -259,8 +258,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         // 分享
         if (userDefault.objectForKey("today") != nil) {
             let dic = userDefault.objectForKey("today") as! Dictionary<String, String>
-            let str = "今天的天气情况是：最高气温" + dic["hightemp"]! + ",最低气温" + dic["curTemp"]!
-            self.sendText(str, inScene: WXSceneSession)
+            let str = "今天的天气情况是：最高气温"
+//                + dic["hightemp"]! + ",最低气温" + dic["curTemp"]!
+            self.sendText(str, inScene: WXSceneTimeline)
         }
     }
     

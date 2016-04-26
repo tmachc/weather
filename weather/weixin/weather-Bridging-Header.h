@@ -1,5 +1,5 @@
 //
-//  WeixinShareTest-Bridging-Header.h
+//  weather-Bridging-Header.h
 //  weather
 //
 //  Created by 韩冲 on 16/4/25.
@@ -10,7 +10,7 @@
 #import "WXApiObject.h"
 #import "WXApi.h"
 
-#ifndef WeixinShareTest_Bridging_Header_h
-#define WeixinShareTest_Bridging_Header_h
+#ifndef weather_Bridging_Header_h
+#define weather_Bridging_Header_h
 
-#endif /* WeixinShareTest_Bridging_Header_h */
+#endif /* weather_Bridging_Header_h */
