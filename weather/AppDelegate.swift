@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        WXApi.registerApp("wx577feefc002f9c18") //改成你实际的AppID
+        let bool = WXApi.registerApp("wx577feefc002f9c18") //改成你实际的AppID
+        print(bool)
         return true
     }
     

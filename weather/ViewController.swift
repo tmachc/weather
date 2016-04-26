@@ -257,10 +257,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     func share() -> Void {
         // 分享
         if (userDefault.objectForKey("today") != nil) {
-            let dic = userDefault.objectForKey("today") as! Dictionary<String, String>
+            let dic = userDefault.objectForKey("today") as! Dictionary<String, AnyObject>
             let str = "今天的天气情况是：最高气温"
-//                + dic["hightemp"]! + ",最低气温" + dic["curTemp"]!
-            self.sendText(str, inScene: WXSceneTimeline)
+                + (dic["hightemp"]! as! String) + ",最低气温" + (dic["curTemp"]! as! String)
+            print(str)
+            self.sendText(str, inScene: WXSceneSession)
         }
     }
     

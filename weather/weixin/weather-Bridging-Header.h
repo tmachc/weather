@@ -9,8 +9,3 @@
 @import UIKit; //使用1.6版必须有（PS：1.5版可以不要）
 #import "WXApiObject.h"
 #import "WXApi.h"
-
-#ifndef weather_Bridging_Header_h
-#define weather_Bridging_Header_h
-
-#endif /* weather_Bridging_Header_h */
