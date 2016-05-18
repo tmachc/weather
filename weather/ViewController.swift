@@ -36,9 +36,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func getWeatherData() -> Void {
-        HttpManager.defaultManager.getRequest(url: "http://apis.baidu.com/apistore/weatherservice/recentweathers?",
-                                              params: ["cityname": "北京", "cityid": "101010100"],
-                                              headers: ["apikey": "ab66b69af4de223187dcc22167846c2e"])
+        HttpManager.defaultManager.getRequest(url: HttpUrl_getWeather,
+                                              params: ["cityname": CityName, "cityid": CityId],
+                                              headers: HttpHeader)
         { (result) -> Void in
             if result["errNum"]!.isEqual(0) {
                 for item in result["retData"]!["history"] as! [Dictionary<String, String>] {
