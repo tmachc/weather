@@ -10,28 +10,35 @@ import UIKit
 import Alamofire
 import SnapKit
 
-class ViewController: UIViewController, UIScrollViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet var scrView: UIScrollView!
+    @IBOutlet var table: UITableView!
+    var refreshControl: UIRefreshControl!
     @IBOutlet var scrWeather: UIScrollView!
+    
     var arrWeather = [Dictionary<String, AnyObject>]()
     var arrToday = [Dictionary<String, String>]()
     let weatherLength = 100
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.title = "天气预报"
+        self.title = "天气" + "(" + CityName + ")"
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.Done, target: nil, action: nil)
         let itemRight = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(share))
         self.navigationItem.rightBarButtonItem = itemRight
-//        let itemLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(gotoSetting))
         let btnLeft = UIBarButtonItem.init(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(gotoSetting))
         self.navigationItem.leftBarButtonItem = btnLeft
         
+        table.tableFooterView = UIView()
+        
+        self.refreshControl = UIRefreshControl.init()
+        self.refreshControl.addTarget(self, action: #selector(getWeatherData), forControlEvents: UIControlEvents.ValueChanged)
+        self.table.addSubview(self.refreshControl)
+        
         self.initView()
+        self.refreshControl.beginRefreshing()
         self.getWeatherData()
     }
     
@@ -41,10 +48,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                                               headers: HttpHeader)
         { (result) -> Void in
             if result["errNum"]!.isEqual(0) {
-                for item in result["retData"]!["history"] as! [Dictionary<String, String>] {
+                for item in result["retData"]!["history"] as! [Dictionary<String, AnyObject>] {
                     self.arrWeather.append(item)
                 }
-                for item in result["retData"]!["forecast"] as! [Dictionary<String, String>] {
+                self.arrWeather.append(result["retData"]!["today"] as! Dictionary<String, AnyObject>)
+                for item in result["retData"]!["forecast"] as! [Dictionary<String, AnyObject>] {
                     self.arrWeather.append(item)
                 }
                 for item in result["retData"]!["today"]!!["index"] as! [Dictionary<String, String>] {
@@ -54,6 +62,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 userDefault.setObject(self.arrToday, forKey: "arrToday")
                 userDefault.setObject(result["retData"]!["today"]!, forKey: "today")
                 self.setData()
+                self.refreshControl.endRefreshing()
             }
             else {
                 if (userDefault.objectForKey("arrWeather") != nil) {
@@ -66,16 +75,16 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func initView() -> Void {
-        for i in 0...10 {
+        for i in 0...11 {
             let viewWeather = UIView.init()
             if i < 7 {
-                viewWeather.backgroundColor = UIColor.orangeColor()
+                viewWeather.backgroundColor = RGBColor(r: 255, g: 222, b: 175)
             }
             else if i == 7 {
-                viewWeather.backgroundColor = UIColor.redColor()
+                viewWeather.backgroundColor = RGBColor(r: 148, g: 229, b: 255)
             }
             else if i > 7 {
-                viewWeather.backgroundColor = UIColor.greenColor()
+                viewWeather.backgroundColor = RGBColor(r: 189, g: 213, b: 255)
             }
             self.scrWeather.addSubview(viewWeather)
             viewWeather.snp_makeConstraints(closure: { (make) in
@@ -97,6 +106,15 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 make.height.equalTo(20)
             })
             
+            let imgWeather = UIImageView.init()
+            imgWeather.tag = 1500 + i;
+            viewWeather.addSubview(imgWeather)
+            imgWeather.snp_makeConstraints(closure: { (make) in
+                make.top.equalTo(labDate.snp_bottom).offset(10)
+                make.width.height.equalTo(weatherLength - 20)
+                make.centerX.equalTo(labDate)
+            })
+            
             let labWeather = UILabel.init()
             labWeather.tag = 1100 + i;
             labWeather.textColor = UIColor.blackColor()
@@ -104,7 +122,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             viewWeather.addSubview(labWeather)
             labWeather.snp_makeConstraints(closure: { (make) in
                 make.left.right.equalTo(viewWeather)
-                make.top.equalTo(labDate.snp_bottom).offset(100)
+                make.top.equalTo(labDate.snp_bottom).offset(weatherLength)
                 make.height.equalTo(20)
             })
             
@@ -141,113 +159,54 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 make.height.equalTo(20)
             })
         }
-        
-        let labChuanYi = UILabel.init()
-        labChuanYi.tag = 2000;
-        labChuanYi.textColor = UIColor.blackColor()
-        labChuanYi.textAlignment = NSTextAlignment.Left
-        self.scrView.addSubview(labChuanYi)
-        labChuanYi.snp_makeConstraints(closure: { (make) in
-            make.top.equalTo(scrWeather.snp_bottom).offset(10)
-            make.left.equalTo(scrView.snp_left).offset(10)
-            make.right.equalTo(scrView.snp_centerX)
-            make.height.equalTo(40)
-        })
-        let labXiChe = UILabel.init()
-        labXiChe.tag = 2001;
-        labXiChe.textColor = UIColor.blackColor()
-        labXiChe.textAlignment = NSTextAlignment.Left
-        self.scrView.addSubview(labXiChe)
-        labXiChe.snp_makeConstraints(closure: { (make) in
-            make.top.height.equalTo(labChuanYi)
-            make.left.equalTo(labChuanYi.snp_right).offset(10)
-            make.right.equalTo(scrView)
-        })
-        
-        let labLvYou = UILabel.init()
-        labLvYou.tag = 2002;
-        labLvYou.textColor = UIColor.blackColor()
-        labLvYou.textAlignment = NSTextAlignment.Left
-        self.scrView.addSubview(labLvYou)
-        labLvYou.snp_makeConstraints(closure: { (make) in
-            make.top.equalTo(labChuanYi.snp_bottom)
-            make.left.right.height.equalTo(labChuanYi)
-        })
-        let labGanMao = UILabel.init()
-        labGanMao.tag = 2003;
-        labGanMao.textColor = UIColor.blackColor()
-        labGanMao.textAlignment = NSTextAlignment.Left
-        self.scrView.addSubview(labGanMao)
-        labGanMao.snp_makeConstraints(closure: { (make) in
-            make.left.height.width.equalTo(labXiChe)
-            make.top.equalTo(labLvYou)
-        })
-        
-        let labYunDong = UILabel.init()
-        labYunDong.tag = 2004;
-        labYunDong.textColor = UIColor.blackColor()
-        labYunDong.textAlignment = NSTextAlignment.Left
-        self.scrView.addSubview(labYunDong)
-        labYunDong.snp_makeConstraints(closure: { (make) in
-            make.top.equalTo(labLvYou.snp_bottom)
-            make.left.right.height.equalTo(labLvYou)
-        })
-        let labZiWaiXian = UILabel.init()
-        labZiWaiXian.tag = 2005;
-        labZiWaiXian.textColor = UIColor.blackColor()
-        labZiWaiXian.textAlignment = NSTextAlignment.Left
-        self.scrView.addSubview(labZiWaiXian)
-        labZiWaiXian.snp_makeConstraints(closure: { (make) in
-            make.left.height.width.equalTo(labGanMao)
-            make.top.equalTo(labYunDong)
-            
-//            make.bottom.equalTo(scrView)
-        })
-        
         self.scrWeather.layoutSubviews()
         self.scrWeather.setContentOffset(CGPoint.init(x: 6 * (weatherLength + 10), y: 0), animated: false)
     }
     
     func setData() -> Void {
-        for i in 0...10 {
-            let dicWeather = self.arrWeather[i] as! Dictionary<String, String>
+        for i in 0...11 {
+            let dicWeather = self.arrWeather[i]
+            
             let labDate = self.view.viewWithTag(1000 + i) as! UILabel
-            labDate.text = dicWeather["date"]
+            labDate.text = dicWeather["date"] as? String
+            
             let labWeather = self.view.viewWithTag(1100 + i) as! UILabel
-            labWeather.text = dicWeather["type"]
+            labWeather.text = dicWeather["type"] as? String
+            
             let labTemp = self.view.viewWithTag(1200 + i) as! UILabel
-            labTemp.text =  String(format:"%@/%@", dicWeather["hightemp"]!, dicWeather["lowtemp"]!)
+            labTemp.text =  String(format:"%@/%@", dicWeather["hightemp"] as! String, dicWeather["lowtemp"] as! String)
+            
             let labWind = self.view.viewWithTag(1300 + i) as! UILabel
-            labWind.text = dicWeather["fengxiang"]
+            labWind.text = dicWeather["fengxiang"] as? String
+            
             let labWindNum = self.view.viewWithTag(1400 + i) as! UILabel
-            labWindNum.text = dicWeather["fengli"]
-        }
-        for dic in self.arrToday {
-            if dic["code"] == "gm" {
-                let lab = self.view.viewWithTag(2003) as! UILabel
-                lab.text = dic["name"]! + ":" + dic["index"]!
-            }
-            else if dic["code"] == "fs" {
-                let lab = self.view.viewWithTag(2005) as! UILabel
-                lab.text = dic["name"]! + ":" + dic["index"]!
-            }
-            else if dic["code"] == "ct" {
-                let lab = self.view.viewWithTag(2000) as! UILabel
-                lab.text = dic["name"]! + ":" + dic["index"]!
-            }
-            else if dic["code"] == "yd" {
-                let lab = self.view.viewWithTag(2004) as! UILabel
-                lab.text = dic["name"]! + ":" + dic["index"]!
-            }
-            else if dic["code"] == "xc" {
-                let lab = self.view.viewWithTag(2001) as! UILabel
-                lab.text = dic["name"]! + ":" + dic["index"]!
-            }
-            else if dic["code"] == "ls" {
-                let lab = self.view.viewWithTag(2002) as! UILabel
-                lab.text = dic["name"]! + ":" + dic["index"]!
+            labWindNum.text = dicWeather["fengli"] as? String
+            
+            let imgWeather = self.view.viewWithTag(1500 + i) as! UIImageView
+            switch dicWeather["type"] as! String {
+            case "晴":
+                imgWeather.image = UIImage.init(named: "sun")
+            case "多云":
+                imgWeather.image = UIImage.init(named: "cloudy_sunny")
+            case "阴":
+                imgWeather.image = UIImage.init(named: "cloud")
+            case "小雨":
+                imgWeather.image = UIImage.init(named: "rain")
+            case "中雨":
+                imgWeather.image = UIImage.init(named: "rain")
+            case "大雨":
+                imgWeather.image = UIImage.init(named: "rain")
+            case "雪":
+                imgWeather.image = UIImage.init(named: "snow")
+            case "霾":
+                imgWeather.image = UIImage.init(named: "fog")
+            case "雾":
+                imgWeather.image = UIImage.init(named: "fog")
+            default:
+                imgWeather.image = UIImage.init(named: "sun")
             }
         }
+        table.reloadData()
     }
     
     func gotoSetting() -> Void {
@@ -272,5 +231,23 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         req.scene = Int32(inScene.rawValue)
         return WXApi.sendReq(req)
     }
+    
+    // MARK: - table
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrToday.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! HomeTableViewCell
+        cell.dicData = arrToday[indexPath.row]
+        cell.setData()
+        return cell
+    }
+    
 }
 

@@ -13,10 +13,6 @@ class HttpManager {
     static let defaultManager = HttpManager()
     private init() {} //This prevents others from using the default '()' initializer for this class.
     
-//    func networkStatus() -> NetworkReachabilityManager {
-//        return NetworkReachabilityManager.NetworkReachabilityStatus
-//    }
-    
     func getRequest(
         url url: String,
         params: [String: AnyObject]?,
