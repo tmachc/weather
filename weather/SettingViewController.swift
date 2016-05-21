@@ -2,7 +2,7 @@
 //  SettingViewController.swift
 //  weather
 //
-//  Created by 韩冲 on 16/4/25.
+//  Created by 刘宏宇 on 16/4/25.
 //  Copyright © 2016年 tmachc. All rights reserved.
 //
 

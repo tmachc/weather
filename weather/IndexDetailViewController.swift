@@ -2,7 +2,7 @@
 //  IndexDetailViewController.swift
 //  weather
 //
-//  Created by 韩冲 on 16/5/21.
+//  Created by 刘宏宇 on 16/5/21.
 //  Copyright © 2016年 tmachc. All rights reserved.
 //
 

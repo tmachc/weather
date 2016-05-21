@@ -2,7 +2,7 @@
 //  HomeTableViewCell.swift
 //  weather
 //
-//  Created by 韩冲 on 16/5/19.
+//  Created by 刘宏宇 on 16/5/19.
 //  Copyright © 2016年 tmachc. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ class HomeTableViewCell: UITableViewCell {
     
     func setData() {
         textLabel!.text = (dicData["name"]! as! String) + ":"
+        
         if dicData["index"]! as! String == "" {
             detailTextLabel!.text = "暂无"
         }
