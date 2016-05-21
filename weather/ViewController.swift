@@ -25,8 +25,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.Done, target: nil, action: nil)
+        
         let itemRight = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(share))
         self.navigationItem.rightBarButtonItem = itemRight
+        
         let btnLeft = UIBarButtonItem.init(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(gotoSetting))
         self.navigationItem.leftBarButtonItem = btnLeft
         
@@ -41,38 +43,51 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print("aaaaaaaa--------",animated)
+        
         self.title = "天气" + "(" + DistrictName + ")"
         self.refreshControl.beginRefreshing()
         self.getWeatherData()
     }
     
     func getWeatherData() -> Void {
+        // http
         HttpManager.defaultManager.getRequest(url: HttpUrl_getWeather,
                                               params: ["cityname": DistrictName, "cityid": CityId],
                                               headers: HttpHeader)
         { (result) -> Void in
+            // 处理结果
             if result["errNum"]!.isEqual(0) {
+                // 请求正确
                 self.arrWeather.removeAll()
                 self.arrToday.removeAll()
+                
+                // 天气列表数据
                 for item in result["retData"]!["history"] as! [Dictionary<String, AnyObject>] {
                     self.arrWeather.append(self.dicRemoveNull(item))
                 }
+                
                 let todayData = self.dicRemoveNull(result["retData"]!["today"] as! Dictionary<String, AnyObject>)
                 self.arrWeather.append(todayData)
+                
                 for item in result["retData"]!["forecast"] as! [Dictionary<String, AnyObject>] {
                     self.arrWeather.append(self.dicRemoveNull(item))
                 }
+                
+                // 天气指数 数据
                 for item in result["retData"]!["today"]!!["index"] as! [Dictionary<String, String>] {
                     self.arrToday.append(self.dicRemoveNull(item))
                 }
+                
+                // 存储数据到本机
                 userDefault.setObject(self.arrWeather, forKey: "arrWeather")
                 userDefault.setObject(self.arrToday, forKey: "arrToday")
                 userDefault.setObject(todayData, forKey: "today")
+                
                 self.setData()
                 self.refreshControl.endRefreshing()
             }
             else {
+                // 没拿到数据 用之前存的数据 setData
                 if (userDefault.objectForKey("arrWeather") != nil) {
                     self.arrWeather = userDefault.objectForKey("arrWeather") as! [Dictionary<String, AnyObject>]
                     self.arrToday = userDefault.objectForKey("arrToday") as! [Dictionary<String, AnyObject>]
@@ -82,6 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // 去掉 null
     func dicRemoveNull(item: Dictionary<String, AnyObject>) -> Dictionary<String, AnyObject> {
         var newItem = item
         if ((newItem["aqi"]?.isKindOfClass(NSNull)) != nil) {
@@ -102,11 +118,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             else if i > 7 {
                 viewWeather.backgroundColor = RGBColor(r: 189, g: 213, b: 255)
             }
-            self.scrWeather.addSubview(viewWeather)
+            self.scrWeather.addSubview(viewWeather) // 加到滚动里面
             viewWeather.snp_makeConstraints(closure: { (make) in
                 make.left.equalTo(10 + i * (weatherLength + 10))
                 make.width.equalTo(weatherLength)
-                make.top.height.bottom.equalTo(self.scrWeather)
+                make.top.equalTo(self.scrWeather).offset(3)
+                make.height.equalTo(self.scrWeather)
+                make.bottom.equalTo(self.scrWeather).offset(3)
                 if i == 11 {
                     make.right.equalTo(-10)
                 }
@@ -115,7 +133,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let labDate = UILabel.init()
             labDate.tag = 1000 + i;
             labDate.textColor = UIColor.blackColor()
-            labDate.textAlignment = NSTextAlignment.Center
+            labDate.textAlignment = NSTextAlignment.Center // 居中
             viewWeather.addSubview(labDate)
             labDate.snp_makeConstraints(closure: { (make) in
                 make.left.top.right.equalTo(viewWeather)
@@ -176,7 +194,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             })
         }
         self.scrWeather.layoutSubviews()
-        self.scrWeather.setContentOffset(CGPoint.init(x: 6 * (weatherLength + 10), y: 0), animated: false)
+        self.scrWeather.setContentOffset(CGPoint.init(x: 6 * (weatherLength + 10), y: 0), animated: false) // 初始位置
     }
     
     func setData() -> Void {
@@ -190,7 +208,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             labWeather.text = dicWeather["type"] as? String
             
             let labTemp = self.view.viewWithTag(1200 + i) as! UILabel
-            labTemp.text =  String(format:"%@/%@", dicWeather["hightemp"] as! String, dicWeather["lowtemp"] as! String)
+            labTemp.text = String(format:"%@/%@", dicWeather["hightemp"] as! String, dicWeather["lowtemp"] as! String)
             
             let labWind = self.view.viewWithTag(1300 + i) as! UILabel
             labWind.text = dicWeather["fengxiang"] as? String
@@ -233,6 +251,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 分享
         if (userDefault.objectForKey("today") != nil) {
             let dic = userDefault.objectForKey("today") as! Dictionary<String, AnyObject>
+            
             let str = "今天的天气情况是：最高气温"
                 + (dic["hightemp"]! as! String) + ",最低气温" + (dic["curTemp"]! as! String)
             print(str)
@@ -253,11 +272,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // 分享到微信
     func sendText(text:String, inScene: WXScene)->Bool{
         let req = SendMessageToWXReq()
-        req.text = text
         req.bText = true
-        req.scene = Int32(inScene.rawValue)
+        
+        req.text = text // 分享的文本
+        req.scene = Int32(inScene.rawValue) // 分享的场景 好友\朋友圈
+        
         return WXApi.sendReq(req)
     }
     
