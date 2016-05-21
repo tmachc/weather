@@ -17,14 +17,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var scrWeather: UIScrollView!
     
     var arrWeather = [Dictionary<String, AnyObject>]()
-    var arrToday = [Dictionary<String, String>]()
+    var arrToday = [Dictionary<String, AnyObject>]()
     let weatherLength = 100
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.title = "天气" + "(" + CityName + ")"
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.Done, target: nil, action: nil)
         let itemRight = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(share))
         self.navigationItem.rightBarButtonItem = itemRight
@@ -38,40 +37,57 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.table.addSubview(self.refreshControl)
         
         self.initView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("aaaaaaaa--------",animated)
+        self.title = "天气" + "(" + DistrictName + ")"
         self.refreshControl.beginRefreshing()
         self.getWeatherData()
     }
     
     func getWeatherData() -> Void {
         HttpManager.defaultManager.getRequest(url: HttpUrl_getWeather,
-                                              params: ["cityname": CityName, "cityid": CityId],
+                                              params: ["cityname": DistrictName, "cityid": CityId],
                                               headers: HttpHeader)
         { (result) -> Void in
             if result["errNum"]!.isEqual(0) {
+                self.arrWeather.removeAll()
+                self.arrToday.removeAll()
                 for item in result["retData"]!["history"] as! [Dictionary<String, AnyObject>] {
-                    self.arrWeather.append(item)
+                    self.arrWeather.append(self.dicRemoveNull(item))
                 }
-                self.arrWeather.append(result["retData"]!["today"] as! Dictionary<String, AnyObject>)
+                let todayData = self.dicRemoveNull(result["retData"]!["today"] as! Dictionary<String, AnyObject>)
+                self.arrWeather.append(todayData)
                 for item in result["retData"]!["forecast"] as! [Dictionary<String, AnyObject>] {
-                    self.arrWeather.append(item)
+                    self.arrWeather.append(self.dicRemoveNull(item))
                 }
                 for item in result["retData"]!["today"]!!["index"] as! [Dictionary<String, String>] {
-                    self.arrToday.append(item)
+                    self.arrToday.append(self.dicRemoveNull(item))
                 }
                 userDefault.setObject(self.arrWeather, forKey: "arrWeather")
                 userDefault.setObject(self.arrToday, forKey: "arrToday")
-                userDefault.setObject(result["retData"]!["today"]!, forKey: "today")
+                userDefault.setObject(todayData, forKey: "today")
                 self.setData()
                 self.refreshControl.endRefreshing()
             }
             else {
                 if (userDefault.objectForKey("arrWeather") != nil) {
                     self.arrWeather = userDefault.objectForKey("arrWeather") as! [Dictionary<String, AnyObject>]
-                    self.arrToday = userDefault.objectForKey("arrToday") as! [Dictionary<String, String>]
+                    self.arrToday = userDefault.objectForKey("arrToday") as! [Dictionary<String, AnyObject>]
                     self.setData()
                 }
             }
         }
+    }
+    
+    func dicRemoveNull(item: Dictionary<String, AnyObject>) -> Dictionary<String, AnyObject> {
+        var newItem = item
+        if ((newItem["aqi"]?.isKindOfClass(NSNull)) != nil) {
+            newItem["aqi"] = ""
+        }
+        return newItem
     }
     
     func initView() -> Void {
@@ -91,7 +107,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 make.left.equalTo(10 + i * (weatherLength + 10))
                 make.width.equalTo(weatherLength)
                 make.top.height.bottom.equalTo(self.scrWeather)
-                if i == 11 - 1 {
+                if i == 11 {
                     make.right.equalTo(-10)
                 }
             })
@@ -220,7 +236,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let str = "今天的天气情况是：最高气温"
                 + (dic["hightemp"]! as! String) + ",最低气温" + (dic["curTemp"]! as! String)
             print(str)
-            self.sendText(str, inScene: WXSceneSession)
+            
+            let alert = UIAlertController.init(title: "选择分享方式", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let friend = UIAlertAction.init(title: "发送给朋友", style: .Default) { aaa in
+                self.sendText(str, inScene: WXSceneSession)
+            }
+            let timeline = UIAlertAction.init(title: "分享到朋友圈", style: .Default) { aaa in
+                self.sendText(str, inScene: WXSceneTimeline)
+            }
+            let cancel = UIAlertAction.init(title: "取消", style: .Cancel, handler: nil)
+            alert.addAction(friend)
+            alert.addAction(timeline)
+            alert.addAction(cancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
         }
     }
     
@@ -247,6 +276,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.dicData = arrToday[indexPath.row]
         cell.setData()
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        self.performSegueWithIdentifier("indexDetail", sender: indexPath)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "indexDetail" {
+            let destinationController = segue.destinationViewController as! IndexDetailViewController
+            destinationController.dicData = arrToday[sender!.row]
+        }
     }
     
 }

@@ -14,6 +14,7 @@
 		2D66BC421CCE6E31006817E2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC411CCE6E31006817E2 /* libz.tbd */; };
 		2D66BC441CCE6F99006817E2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D66BC431CCE6F99006817E2 /* CoreTelephony.framework */; };
 		2D66BC461CCE760E006817E2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66BC451CCE760E006817E2 /* SettingViewController.swift */; };
+		2D7F51EE1CF036FE00624775 /* IndexDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7F51ED1CF036FE00624775 /* IndexDetailViewController.swift */; };
 		2DAADDFE1CC668FE0020F200 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAADDFD1CC668FE0020F200 /* Common.swift */; };
 		2DEE8D0C1CEDF79800D5C1C8 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEE8D0B1CEDF79800D5C1C8 /* HomeTableViewCell.swift */; };
 		E70FDB841C968F820065F327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FDB831C968F820065F327 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 		2D66BC411CCE6E31006817E2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2D66BC431CCE6F99006817E2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2D66BC451CCE760E006817E2 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		2D7F51ED1CF036FE00624775 /* IndexDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexDetailViewController.swift; sourceTree = "<group>"; };
 		2DAADDFD1CC668FE0020F200 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		2DEE8D0B1CEDF79800D5C1C8 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		31CD397B56BBEEEE9C66CEE3 /* Pods_weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				E70FDB851C968F820065F327 /* ViewController.swift */,
 				2DEE8D0B1CEDF79800D5C1C8 /* HomeTableViewCell.swift */,
 				2D66BC451CCE760E006817E2 /* SettingViewController.swift */,
+				2D7F51ED1CF036FE00624775 /* IndexDetailViewController.swift */,
 				E70FDB8A1C968F820065F327 /* Assets.xcassets */,
 				E70FDB8C1C968F820065F327 /* LaunchScreen.storyboard */,
 				E70FDB8F1C968F820065F327 /* Info.plist */,
@@ -175,6 +178,7 @@
 				TargetAttributes = {
 					E70FDB7F1C968F820065F327 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 973TH9R7F8;
 					};
 				};
 			};
@@ -264,6 +268,7 @@
 			files = (
 				2DEE8D0C1CEDF79800D5C1C8 /* HomeTableViewCell.swift in Sources */,
 				2D66BC461CCE760E006817E2 /* SettingViewController.swift in Sources */,
+				2D7F51EE1CF036FE00624775 /* IndexDetailViewController.swift in Sources */,
 				2DAADDFE1CC668FE0020F200 /* Common.swift in Sources */,
 				E70FDB981C96BA4D0065F327 /* HttpManager.swift in Sources */,
 				E70FDB861C968F820065F327 /* ViewController.swift in Sources */,

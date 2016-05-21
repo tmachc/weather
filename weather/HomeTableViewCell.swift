@@ -10,18 +10,16 @@ import UIKit
 
 class HomeTableViewCell: UITableViewCell {
     
-    var dicData = Dictionary<String, String>()
-    
-    @IBOutlet var labName: UILabel!
-    @IBOutlet var labValue: UILabel!
+    var dicData = Dictionary<String, AnyObject>()
     
     func setData() {
-        labName.text = dicData["name"]! + ":"
-        if dicData["index"]! == "" {
-            labValue.text = "暂无"
+        textLabel!.text = (dicData["name"]! as! String) + ":"
+        if dicData["index"]! as! String == "" {
+            detailTextLabel!.text = "暂无"
         }
         else {
-            labValue.text = dicData["index"]!
+            detailTextLabel!.text = dicData["index"]! as? String
         }
+
     }
 }
